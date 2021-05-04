@@ -10,4 +10,5 @@ edition = "2018"
 colored = "2.0.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.8"
+dirs = "3.0.2"
 

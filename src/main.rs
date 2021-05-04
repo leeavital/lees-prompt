@@ -6,6 +6,7 @@ use std::format;
 use std::fs;
 use std::process::Command;
 use std::str;
+use dirs;
 
 fn main() {
     // env::set_var("CLICOLOR_FORCE", "yes");
@@ -24,7 +25,10 @@ fn main() {
 }
 
 fn get_kube_context() -> Option<String> {
-    let read = fs::read_to_string("/Users/lee.avital/.kube/config").ok()?;
+    let mut kpath = dirs::home_dir()?;
+    kpath.push(".kube");
+    kpath.push("config");
+    let read = fs::read_to_string(kpath).ok()?;
     let kube_config: KubeConfig = serde_yaml::from_str(&read).ok()?;
 
     for ctx in &kube_config.contexts {
